@@ -57,7 +57,8 @@
 
    <div class="card-body">
 
-    <form action="">
+    <form action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">
+     @csrf
                 
                 <div class="form-group mb-3 row">
                     <label class="form-label">Name</label>
