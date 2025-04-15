@@ -14,6 +14,11 @@ class BrandController extends Controller
     }
     //End Method 
 
+    public function AddBrand(){ 
+        return view('admin.backend.brand.add_brand');
+    }
+    //End Method
+
 
 
 }
