@@ -140,7 +140,7 @@
         <div class="form-group mb-3 row">
             <label class="form-label">New Password</label>
             <div class="col-lg-12 col-xl-12">
-                <input class="form-control @error('new_password') is-invalid          
+  <input class="form-control @error('new_password') is-invalid          
                 @enderror" name="new_password" id="new_password" type="password" placeholder="New Password">
                 @error('new_password')
                     <span class="text-danger">{{ $message }}</span>
