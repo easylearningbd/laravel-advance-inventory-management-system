@@ -29,7 +29,9 @@
                     </div><!-- end card header -->
 
     <div class="card-body">
-        <form class="row g-3">
+        <form action="{{ route('store.brand') }}" method="post" class="row g-3" enctype="multipart/form-data">
+         @csrf
+
             <div class="col-md-12">
                 <label for="validationDefault01" class="form-label">Brand Name</label>
                 <input type="text" class="form-control" name="name"  >
