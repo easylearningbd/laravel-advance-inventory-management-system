@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use App\Models\Customer;
 
 class SupplierController extends Controller
 {
@@ -73,5 +74,40 @@ class SupplierController extends Controller
 
     }
     //End Method 
+
+    ///// Customer Method All 
+
+    public function AllCustomer(){
+        $customer = Customer::latest()->get();
+        return view('admin.backend.customer.all_customer',compact('customer'));
+    }
+    //End Method 
+
+    public function AddCustomer(){ 
+        return view('admin.backend.customer.add_customer');
+    }
+    //End Method 
+
+    public function StoreCustomer(Request $request){
+ 
+        Customer::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+
+        $notification = array(
+            'message' => 'Customer Inserted Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->route('all.customer')->with($notification);
+
+    }
+    //End Method 
+
+
+
+
 
 } 

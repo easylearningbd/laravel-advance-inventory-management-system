@@ -65,6 +65,17 @@ Route::controller(SupplierController::class)->group(function(){
 });
 
 
+Route::controller(SupplierController::class)->group(function(){
+    Route::get('/all/customer', 'AllCustomer')->name('all.customer'); 
+    Route::get('/add/customer', 'AddCustomer')->name('add.customer');
+    Route::post('/store/customer', 'StoreCustomer')->name('store.customer');
+    Route::get('/edit/supplier/{id}', 'EditSupplier')->name('edit.supplier');
+    Route::post('/update/supplier', 'UpdateSupplier')->name('update.supplier');
+    Route::get('/delete/supplier/{id}', 'DeleteSupplier')->name('delete.supplier');
+});
+
+
+
     
 });
 
