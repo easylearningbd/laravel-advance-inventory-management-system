@@ -30,7 +30,40 @@ class ProductController extends Controller
     }
      //End Method 
 
+     public function EditCategory($id){
+        $category = ProductCategory::find($id);
+        return response()->json($category);
+     }
+      //End Method 
 
+      public function UpdateCategory(Request $request){
+        $cat_id = $request->cat_id;
+
+        ProductCategory::find($cat_id)->update([
+            'category_name' => $request->category_name,
+            'category_slug' => strtolower(str_replace(' ','-',$request->category_name)), 
+        ]);
+
+        $notification = array(
+            'message' => 'ProductCategory Updated Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->back()->with($notification);
+ 
+    }
+     //End Method 
+
+    public function DeleteCategory($id){
+
+        ProductCategory::find($id)->delete();
+        $notification = array(
+            'message' => 'ProductCategory Delete Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->back()->with($notification);
+
+    }
+    //End Method 
 
 
 
