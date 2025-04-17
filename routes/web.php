@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\WareHouseController;
+use App\Http\Controllers\Backend\SupplierController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,6 +53,17 @@ Route::controller(WareHouseController::class)->group(function(){
     Route::post('/update/warehouse', 'UpdateWarehouse')->name('update.warehouse');
     Route::get('/delete/warehouse/{id}', 'DeleteWarehouse')->name('delete.warehouse');
 });
+
+
+Route::controller(SupplierController::class)->group(function(){
+    Route::get('/all/supplier', 'AllSupplier')->name('all.supplier'); 
+    Route::get('/add/supplier', 'AddSupplier')->name('add.supplier');
+    Route::post('/store/warehouse', 'StoreWarehouse')->name('store.warehouse');
+    Route::get('/edit/warehouse/{id}', 'EditWarehouse')->name('edit.warehouse');
+    Route::post('/update/warehouse', 'UpdateWarehouse')->name('update.warehouse');
+    Route::get('/delete/warehouse/{id}', 'DeleteWarehouse')->name('delete.warehouse');
+});
+
 
     
 });
