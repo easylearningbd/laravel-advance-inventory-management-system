@@ -106,7 +106,41 @@ class SupplierController extends Controller
     }
     //End Method 
 
+    public function EditCustomer($id){
+        $customer = Customer::find($id);
+        return view('admin.backend.customer.edit_customer',compact('customer')); 
+    }
+        //End Method 
 
+public function UpdateCustomer(Request $request){
+    $cust_id = $request->id;
+
+    Customer::find($cust_id)->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'address' => $request->address,
+    ]);
+
+    $notification = array(
+        'message' => 'Customer Updated Successfully',
+        'alert-type' => 'success'
+        ); 
+     return redirect()->route('all.customer')->with($notification);
+
+}
+//End Method 
+
+public function DeleteCustomer($id){
+    Customer::find($id)->delete();
+
+    $notification = array(
+        'message' => 'Customer Deleted Successfully',
+        'alert-type' => 'success'
+        ); 
+     return redirect()->back()->with($notification);
+}
+//End Method 
 
 
 
