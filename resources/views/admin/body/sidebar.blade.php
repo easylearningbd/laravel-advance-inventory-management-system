@@ -47,8 +47,24 @@
             <ul class="nav-second-level">
         <li>
         <a href="{{ route('all.brand') }}" class="tp-link">All Brand</a>
-       </li>
-                 
+       </li>   
+                    
+            </ul>
+        </div>
+    </li>
+
+
+    <li>
+        <a href="#WareHouse" data-bs-toggle="collapse">
+            <i data-feather="users"></i>
+            <span> WareHouse Manage </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="WareHouse">
+            <ul class="nav-second-level">
+        <li>
+        <a href="{{ route('all.warehouse') }}" class="tp-link">All WareHouse</a>
+       </li>   
                     
             </ul>
         </div>

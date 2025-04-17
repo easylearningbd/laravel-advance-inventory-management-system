@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\WareHouseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +37,15 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(BrandController::class)->group(function(){
     Route::get('/all/brand', 'AllBrand')->name('all.brand'); 
+    Route::get('/add/brand', 'AddBrand')->name('add.brand');
+    Route::post('/store/brand', 'StoreBrand')->name('store.brand');
+    Route::get('/edit/brand/{id}', 'EditBrand')->name('edit.brand');
+    Route::post('/update/brand', 'UpdateBrand')->name('update.brand');
+    Route::get('/delete/brand/{id}', 'DeleteBrand')->name('delete.brand');
+});
+
+Route::controller(WareHouseController::class)->group(function(){
+    Route::get('/all/warehouse', 'AllWarehouse')->name('all.warehouse'); 
     Route::get('/add/brand', 'AddBrand')->name('add.brand');
     Route::post('/store/brand', 'StoreBrand')->name('store.brand');
     Route::get('/edit/brand/{id}', 'EditBrand')->name('edit.brand');
