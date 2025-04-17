@@ -12,8 +12,8 @@
             </div>
 
             <div class="text-end">
-                <ol class="breadcrumb m-0 py-0">
-                     <a href="{{ route('add.customer') }}" class="btn btn-secondary">Add Category</a>
+                <ol class="breadcrumb m-0 py-0"> 
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#standard-modal"> Add Category </button>
                 </ol>
             </div>
         </div>
@@ -65,6 +65,38 @@
 
 </div> <!-- content -->
 
+
+
+
+
+ <!-- Default Modal -->
+ <div class="modal fade" id="standard-modal" tabindex="-1" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="standard-modalLabel">Product Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+    <div class="modal-body">
+    <form action="{{ route('store.category') }}" method="post">
+    @csrf
+
+    <div class="form-group col-md-12">
+        <label for="input1" class="form-label">Product Category Name</label>
+        <input type="text" name="category_name" class="form-control" id="input1"> 
+    </div> 
+            
+    </div>
+    <div class="modal-footer"> 
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
+
+
+        </div>
+    </div>
+</div>
 
 
 @endsection

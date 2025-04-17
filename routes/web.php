@@ -77,7 +77,8 @@ Route::controller(SupplierController::class)->group(function(){
 
 
 Route::controller(ProductController::class)->group(function(){
-    Route::get('/all/category', 'AllCategory')->name('all.category'); 
+    Route::get('/all/category', 'AllCategory')->name('all.category');
+    Route::post('/store/category', 'StoreCategory')->name('store.category'); 
     
 });
 
