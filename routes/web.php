@@ -85,6 +85,12 @@ Route::controller(ProductController::class)->group(function(){
     
 });
 
+Route::controller(ProductController::class)->group(function(){
+    Route::get('/all/product', 'AllProduct')->name('all.product');
+    
+    
+});
+
 
 
 
