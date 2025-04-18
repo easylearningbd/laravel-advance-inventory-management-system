@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Supplier;
+use App\Models\Brand;
+use App\Models\WareHouse;
 
 class ProductController extends Controller
 {
@@ -73,6 +76,15 @@ class ProductController extends Controller
     public function AllProduct(){
         $allData = Product::orderBy('id','desc')->get();
         return view('admin.backend.product.product_list',compact('allData'));
+    }
+    //End Method 
+
+    public function AddProduct(){
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+        $suppliers = Supplier::all();
+        $warehouses = WareHouse::all();
+        return view('admin.backend.product.add_product',compact('categories','brands','suppliers','warehouses')); 
     }
     //End Method 
 
