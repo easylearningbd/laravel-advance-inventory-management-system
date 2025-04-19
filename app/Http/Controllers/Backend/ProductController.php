@@ -145,7 +145,56 @@ class ProductController extends Controller
     }
      //End Method 
 
-     public function UpdateProduct(){
+     public function UpdateProduct(Request $request){
+        $pro_id = $request->id;
+
+        $product = Product::findOrFail($pro_id);
+
+        $product->name = $request->name;
+        $product->code = $request->code;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->price = $request->price;
+        $product->stock_alert = $request->stock_alert;
+        $product->note = $request->note;
+        $product->warehouse_id = $request->warehouse_id;
+        $product->supplier_id = $request->supplier_id;
+        $product->product_qty = $request->product_qty;
+        $product->status = $request->status;
+        $product->save();
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $img) {
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            $imgs = $manager->read($img);
+            $imgs->resize(150,150)->save(public_path('upload/productimg/'.$name_gen)); 
+
+            $product->images()->create([
+                'image' => 'upload/productimg/'.$name_gen
+            ]); 
+
+            }
+         }
+
+
+        if ($request->has('remove_image')) {
+            foreach($request->remove_image as $removeImageId) {
+                $img = ProductImage::find($removeImageId);
+                if ($img ) {
+                    if (file_exists(public_path($img->image))) {
+                       unlink(public_path($img->image));
+                    }
+                    $img->delete();
+                }
+            }
+        }
+
+        $notification = array(
+            'message' => 'Product Updaetd Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->route('all.product')->with($notification); 
 
      }
       //End Method 
