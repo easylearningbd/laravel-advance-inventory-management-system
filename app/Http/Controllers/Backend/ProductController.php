@@ -199,6 +199,33 @@ class ProductController extends Controller
      }
       //End Method 
 
+    public function DeleteProduct($id){
+        $product = Product::findOrFail($id);
+
+        /// Delete associated images
+        $images = ProductImage::where('product_id',$id)->get();
+        foreach($images as $img){
+            $imagePath = public_path($img->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        // Delete image from records
+        ProductImage::where('product_id',$id)->delete();
+
+        // Delete the product 
+        $product->delete();
+
+           $notification = array(
+            'message' => 'Product Deleted Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->back()->with($notification);
+
+    }
+      //End Method 
+
 
 
 }

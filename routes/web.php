@@ -91,6 +91,7 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/store/product', 'StoreProduct')->name('store.product');
     Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
     Route::post('/update/product', 'UpdateProduct')->name('update.product');
+    Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
     
 });
 
