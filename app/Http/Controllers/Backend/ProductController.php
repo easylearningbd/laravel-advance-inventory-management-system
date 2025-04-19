@@ -145,6 +145,11 @@ class ProductController extends Controller
     }
      //End Method 
 
+     public function UpdateProduct(){
+
+     }
+      //End Method 
+
 
 
 }

@@ -17,8 +17,9 @@
         </div>
          <div class="card">
             <div class="card-body">
-<form action="{{ route('store.product') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('update.product') }}" method="post" enctype="multipart/form-data">
    @csrf
+    <input type="hidden" name="id" value="{{ $editData->id }}"  >
 
    <div class="row">
       <div class="col-xl-8">
@@ -84,7 +85,25 @@
                <input name="image[]" accept=".png, .jpg, .jpeg" multiple="" type="file" id="multiImg" class="upload-input-file form-control">
             </div>
                
-            <div class="row" id="preview_img"></div>
+    <div class="row" id="preview_img">
+        @if (isset($editData) && $editData->images->count() > 0)
+        @foreach ($editData->images as $img)
+        <div class="col-md-3 mb-2">
+            <img src="{{ asset($img->image) }}" alt="Product image" class="img-thumbnail">
+        
+        <div class="form-check mt-1">
+            <input class="form-check-input" type="checkbox" name="remove_image[]" value="{{ $img->id }}" id="remove_image_{{ $img->id }}">
+            <label for="remove_image_{{ $img->id }}" class="form-check-label">Remove</label> 
+        </div>
+
+        </div>
+            
+        @endforeach
+            
+        @endif
+
+        
+    </div>
          </div>
          <div>
             <div class="col-md-12 mb-3">
