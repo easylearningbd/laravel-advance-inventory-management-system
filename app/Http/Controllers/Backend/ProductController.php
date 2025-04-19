@@ -134,6 +134,17 @@ class ProductController extends Controller
     }
     //End Method 
 
+    public function EditProduct($id){
+        $editData = Product::find($id);
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+        $suppliers = Supplier::all();
+        $warehouses = WareHouse::all();
+        $multiimg = ProductImage::where('product_id',$id)->get();
+        return view('admin.backend.product.edit_product',compact('categories','brands','suppliers','warehouses','editData','multiimg')); 
+    }
+     //End Method 
+
 
 
 }
