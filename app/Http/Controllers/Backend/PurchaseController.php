@@ -21,5 +21,12 @@ class PurchaseController extends Controller
     }
     // End Method 
 
+    public function AddPurchase(){
+        $suppliers = Supplier::all();
+        $warehouses = WareHouse::all();
+        return view('admin.backend.purchase.add_purchase',compact('suppliers','warehouses'));
+    }
+     // End Method 
+
 
 }
