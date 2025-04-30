@@ -124,6 +124,26 @@
         </div>
     </li>
 
+
+    <li>
+        <a href="#Purchase" data-bs-toggle="collapse">
+            <i data-feather="users"></i>
+            <span> Purchase Manage </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="Purchase">
+            <ul class="nav-second-level">
+        <li>
+        <a href="{{ route('all.purchase') }}" class="tp-link">All Purchase</a>
+       </li>   
+       <li>
+        <a href="{{ route('all.product') }}" class="tp-link">Purchase Return</a>
+       </li>  
+                    
+            </ul>
+        </div>
+    </li>
+
     <li>
         <a href="#sidebarError" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
