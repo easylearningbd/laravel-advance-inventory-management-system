@@ -289,6 +289,53 @@ function updateGrandTotal() {
   });
 
 
+  // Save changes event
+  document.getElementById("saveChanges").addEventListener("click", function () {
+    let updatedPrice = parseFloat(document.getElementById("modalPrice").value.replace("TK ", ""));
+    let discountValue = parseFloat(document.getElementById("modalDiscount").value) || 0;
+    let discountType = document.getElementById("modalDiscountType").value;
+    let productId = modal.getAttribute("data-id");
+    let row = document.querySelector(`tr[data-id="${productId}"]`);
+
+    if (row) {
+          let priceCell = row.querySelector("td:nth-child(2)");
+          let qtyInput = row.querySelector(".qty-input");
+          let discountInput = row.querySelector(".discount-input");
+          let subtotalCell = row.querySelector(".subtotal");
+
+          // Update price in table
+          priceCell.innerText = updatedPrice.toFixed(2);
+          qtyInput.setAttribute("data-cost", updatedPrice);
+
+          // Set discount value
+          discountInput.value = discountValue.toFixed(2);
+
+          // Apply discount calculation
+          let qty = parseFloat(qtyInput.value);
+          let discountAmount = discountType === "percentage" ? (updatedPrice * qty * (discountValue / 100)) : discountValue;
+          let subtotal = (updatedPrice * qty) - discountAmount;
+
+          subtotalCell.innerText = subtotal.toFixed(2);
+
+          modal.style.display = "none"; // Close modal
+          updateGrandTotal();
+    }
+});
+
+  // Event listeners for discount and shipping input change
+  document.getElementById("inputDiscount").addEventListener("input", updateGrandTotal);
+  document.getElementById("inputShipping").addEventListener("input", updateGrandTotal);
+
+  
+document.getElementById("inputDiscount").addEventListener("input", function () {
+    document.getElementById("displayDiscount").textContent = this.value || 0;
+});
+document.getElementById("inputShipping").addEventListener("input", function () {
+    document.getElementById("shippingDisplay").textContent = this.value || 0;
+});
+
+
+
     
 
 
