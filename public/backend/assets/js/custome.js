@@ -216,6 +216,79 @@ function updateGrandTotal() {
 
 }
 
+
+ /// Start Modal  
+ 
+  // this is modal, instead to html
+  let modal = document.createElement("div");
+  modal.id = "customModal";
+  modal.style.position = "fixed";
+  modal.style.top = "0";
+  modal.style.left = "0";
+  modal.style.width = "100%";
+  modal.style.height = "100%";
+  modal.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  modal.style.display = "none";
+  modal.style.justifyContent = "center";
+  modal.style.alignItems = "center";
+  modal.style.zIndex = "1000";
+
+  modal.innerHTML = `
+      <div style="background: white; padding: 20px; border-radius: 5px; width: 400px;">
+          <h3 id="modalTitle"></h3>
+          <label>Product Price: <span class="text-danger">*</span></label>
+          <input type="text" id="modalPrice" class="form-control" />
+
+          <label>Discount Type: <span class="text-danger">*</span></label>
+          <select id="modalDiscountType" class="form-control">
+              <option value="">Select Discount</option>
+              <option value="fixed">Fixed</option>
+              <option value="percentage">Percentage</option>
+          </select>
+
+          <label>Discount: <span class="text-danger">*</span></label>
+          <input type="text" id="modalDiscount" class="form-control" value="0.00" />
+
+          <div style="margin-top: 15px; text-align: right;">
+              <button id="closeModal" class="btn btn-secondary">Close</button>
+              <button id="saveChanges" class="btn btn-primary">Save Changes</button>
+          </div>
+      </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Function to show modal
+  function showModal(productName, productPrice) {
+        document.getElementById("modalTitle").innerText = productName;
+        document.getElementById("modalPrice").value = "TK " + productPrice;
+        modal.style.display = "flex";
+  }
+
+  // Event listener to open modal
+  document.addEventListener("click", function (event) {
+        if (event.target.closest(".edit-discount-btn")) {
+              let button = event.target.closest(".edit-discount-btn");
+              let productId = button.getAttribute("data-id");
+              let productName = button.getAttribute("data-name");
+              let productPrice = button.getAttribute("data-cost");
+
+              // Set modal values
+              document.getElementById("modalTitle").innerText = productName;
+              document.getElementById("modalPrice").value = "TK " + productPrice;
+              modal.setAttribute("data-id", productId); // Store productId in modal
+
+              // Show modal
+              modal.style.display = "flex";
+        }
+  });
+
+  // Close modal event
+  document.getElementById("closeModal").addEventListener("click", function () {
+        modal.style.display = "none";
+  });
+
+
     
 
 
