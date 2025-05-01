@@ -195,7 +195,9 @@
 </div>
 
  
-
+<script>
+    var productSearchUrl = "{{ route('purchase.product.search') }}"
+</script>
 
 
 @endsection

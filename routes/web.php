@@ -100,6 +100,7 @@ Route::controller(ProductController::class)->group(function(){
 Route::controller(PurchaseController::class)->group(function(){
     Route::get('/all/purchase', 'AllPurchase')->name('all.purchase');
     Route::get('/add/purchase', 'AddPurchase')->name('add.purchase'); 
+    Route::get('/purchase/product/search', 'PurchaseProductSearch')->name('purchase.product.search'); 
     
 });
 
