@@ -114,8 +114,108 @@ document.addEventListener("DOMContentLoaded", function(){
         orderItemsTableBody.innerHTML += row;
         productList.innerHTML = "";
         productSearchInput.value = ""; 
+
+        updateEvents();
+        updateGrandTotal()
         
   }
+
+
+  
+  function updateEvents() {
+    document.querySelectorAll(".qty-input, .discount-input").forEach(input => {
+          input.addEventListener("input", function () {
+                let row = this.closest("tr");
+                let qty = parseInt(row.querySelector(".qty-input").value) || 1;
+                let unitCost = parseFloat(row.querySelector(".qty-input").getAttribute("data-cost")) || 0;
+                let discount = parseFloat(row.querySelector(".discount-input").value) || 0;
+
+                let subtotal = (unitCost * qty) - discount;
+                row.querySelector(".subtotal").textContent = subtotal.toFixed(2);
+
+                updateGrandTotal();
+          });
+    });
+
+    // Increment quantity
+    document.querySelectorAll(".increment-qty").forEach(button => {
+          button.addEventListener("click", function () {
+                let input = this.closest(".input-group").querySelector(".qty-input");
+                let max = parseInt(input.getAttribute("max"));
+                let value = parseInt(input.value);
+                if (value < max) {
+                      input.value = value + 1;
+                      updateSubtotal(this.closest("tr"));
+                }
+          });
+    });
+
+    // Decrement quantity
+    document.querySelectorAll(".decrement-qty").forEach(button => {
+          button.addEventListener("click", function () {
+                let input = this.closest(".input-group").querySelector(".qty-input");
+                let min = parseInt(input.getAttribute("min"));
+                let value = parseInt(input.value);
+                if (value > min) {
+                      input.value = value - 1;
+                      updateSubtotal(this.closest("tr"));
+                }
+          });
+    });
+
+    // Remove product row
+    document.querySelectorAll(".remove-product").forEach(button => {
+          button.addEventListener("click", function () {
+                this.closest("tr").remove();
+                updateGrandTotal();
+          });
+    });
+}
+
+function updateSubtotal(row) {
+    let qty = parseFloat(row.querySelector(".qty-input").value);
+    let discount = parseFloat(row.querySelector(".discount-input").value) || 0;
+    let netUnitCost = parseFloat(row.querySelector(".qty-input").dataset.cost);
+
+    // Calculate subtotal after discount
+    let subtotal = (netUnitCost * qty) - discount;
+    row.querySelector(".subtotal").innerText = subtotal.toFixed(2);
+
+    // Update Grand Total
+    updateGrandTotal();
+}
+
+
+
+
+// Grand total update function
+function updateGrandTotal() {
+    let grandTotal = 0;
+
+    // Calculate subtotal sum
+    document.querySelectorAll(".subtotal").forEach(function (item) {
+          grandTotal += parseFloat(item.textContent) || 0;
+    });
+
+    // Get discount and shipping values
+    let discount = parseFloat(document.getElementById("inputDiscount").value) || 0;
+    let shipping = parseFloat(document.getElementById("inputShipping").value) || 0;
+
+    // Apply discount and add shipping cost
+    grandTotal = grandTotal - discount + shipping;
+
+    // Ensure grand total is not negative
+    if (grandTotal < 0) {
+          grandTotal = 0;
+    }
+
+    // Update Grand Total display
+    document.getElementById("grandTotal").textContent = `TK ${grandTotal.toFixed(2)}`;
+
+    document.querySelector("input[name='grand_total']").value = grandTotal.toFixed(2);
+
+}
+
     
 
 
