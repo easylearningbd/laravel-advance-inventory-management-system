@@ -75,7 +75,7 @@ class PurchaseController extends Controller
         ]);
 
         /// Store Purchase Items & Update Stock 
-    foreach($request->$products as $productData){
+    foreach($request->products as $productData){
         $product = Product::findOrFail($productData['id']);
         $netUnitCost = $productData['net_unit_cost'] ?? $product->price;
 
@@ -96,15 +96,23 @@ class PurchaseController extends Controller
             'subtotal' => $subtotal, 
         ]);
 
-
+        $product->increment('product_qty', $productData['quantity']); 
     }
 
+    $purchase->update(['grand_total' => $grandTotal + $request->shipping - $request->discount]);
 
-       
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
+    DB::commit();
 
+    $notification = array(
+        'message' => 'Purchase Stored Successfully',
+        'alert-type' => 'success'
+     ); 
+     return redirect()->route('all.purchase')->with($notification);  
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['error' => $e->getMessage()], 500);
+      } 
     }
     // End Method 
 
