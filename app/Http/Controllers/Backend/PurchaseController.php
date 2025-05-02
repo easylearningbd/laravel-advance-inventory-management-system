@@ -12,6 +12,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\Purchase; 
 use App\Models\PurchaseItem; 
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -47,6 +48,42 @@ class PurchaseController extends Controller
     
     }
      // End Method 
+
+    public function StorePurchase(Request $request){
+
+        $request->validate([
+            'date' => 'required|date',
+            'status' => 'required',
+            'supplier_id' => 'required',
+        ]);
+
+    try {
+
+        DB::beginTransaction();
+
+        $grandTotal = 0;
+
+        $purchase = Purchase::create([
+            'date' => $request->date,
+            'warehouse_id' => $request->warehouse_id,
+            'supplier_id' => $request->supplier_id,
+            'discount' => $request->discount ?? 0,
+            'shipping' => $request->shipping ?? 0,
+            'status' => $request->status,
+            'note' => $request->note,
+            'grand_total' => 0, 
+        ]);
+
+        /// Store Purchase Items & Update Stock 
+
+
+       
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+
+    }
+    // End Method 
 
 
 }
