@@ -75,6 +75,29 @@ class PurchaseController extends Controller
         ]);
 
         /// Store Purchase Items & Update Stock 
+    foreach($request->$products as $productData){
+        $product = Product::findOrFail($productData['id']);
+        $netUnitCost = $productData['net_unit_cost'] ?? $product->price;
+
+        if ($netUnitCost === null) {
+            throw new \Exception("Net Unit cost is missing ofr the product id" . $productData['id']);
+        }
+
+        $subtotal = ($netUnitCost * $productData['quantity']) - ($productData['discount'] ?? 0);
+        $grandTotal += $subtotal;
+
+        PurchaseItem::create([
+            'purchase_id' => $purchase->id,
+            'product_id' => $productData['id'],
+            'net_unit_cost' => $netUnitCost,
+            'stock' => $product->product_qty + $productData['quantity'],
+            'quantity' => $productData['quantity'],
+            'discount' => $productData['discount'] ?? 0,
+            'subtotal' => $subtotal, 
+        ]);
+
+
+    }
 
 
        
