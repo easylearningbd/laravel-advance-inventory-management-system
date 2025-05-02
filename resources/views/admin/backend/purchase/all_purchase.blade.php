@@ -44,13 +44,15 @@
     @foreach ($allData as $key=> $item) 
     <tr>
         <td>{{ $key+1 }}</td> 
-        <td>{{ $item->warehouse_id }}</td>
+        <td>{{ $item['warehouse']['name'] }}</td>
         <td>{{ $item->status }}</td>
         <td>${{ $item->grand_total }}</td> 
         <td>Cash</td>
         <td>{{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}</td>
         <td>
    <a title="Details" href="{{ route('details.product',$item->id) }}" class="btn btn-info btn-sm"> <span class="mdi mdi-eye-circle mdi-18px"></span> </a> 
+
+   <a title="PDF Invoice" href="{{ route('details.product',$item->id) }}" class="btn btn-primary btn-sm"> <span class="mdi mdi-download-circle mdi-18px"></span> </a> 
 
     <a title="Edit" href="{{ route('edit.product',$item->id) }}" class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px"></span> </a>  
 
