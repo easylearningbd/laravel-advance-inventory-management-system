@@ -117,4 +117,13 @@ class PurchaseController extends Controller
     // End Method 
 
 
+    public function EditPurchase($id){
+        $editData = Purchase::with('purchaseItems.product')->findOrFail($id);
+        $suppliers = Supplier::all();
+        $warehouses = WareHouse::all();
+        return view('admin.backend.purchase.edit_purchase',compact('editData','suppliers','warehouses'));
+    }
+    // End Method 
+
+
 }
