@@ -89,7 +89,52 @@
                  <th>Action</th>
               </tr>
            </thead>
-           <tbody>
+           <tbody id="productBody">
+    @foreach ($editData->purchaseItems as $item)
+    <tr data-id={{ $item->id  }}>
+       
+        <td class="d-flex align-items-center gap-2">
+            <input type="text" class="form-control" value="{{ $item->product->code }} - {{ $item->product->name }}" readonly style="max-width: 300px" >
+            <button type="button" class="btn btn-primary btn-sm edit-discount-btn" 
+            data-id="{{ $item->id }}"
+            data-name="{{ $item->product->name }}"
+            data-cost="{{ $item->net_unit_cost }}"
+            data-bs-toggle="modal" data-bs-target="#discountModal" >
+            <span class="mdi mdi-book-edit "></span> 
+            </button> 
+        </td>
+
+    <td>
+        <input type="number" name="products[{{ $item->product->id }}][net_unit_cost]" class="form-control net-cost" value="{{ $item->net_unit_cost }}" style="max-width: 90px;" readonly>
+
+    </td>
+    <td>
+        <input type="number" name="products[{{ $item->product->id }}][stock]" class="form-control" value="{{ $item->product->product_qty }}" style="max-width: 80px;" readonly>
+    </td>
+
+    <td>
+        <div class="input-group">
+            <button class="btn btn-outline-secondary decrement-qty" type="button">−</button>
+            <input type="text" class="form-control text-center qty-input"
+                name="products[{{ $item->product->id }}][quantity]" value="{{ $item->quantity }}" min="1" max="{{ $item->stock }}"
+                data-cost="{{ $item->net_unit_cost }}" style="max-width: 50px;">
+            <button class="btn btn-outline-secondary increment-qty" type="button">+</button>
+        </div>
+    </td>
+
+    <td>
+        <input type="number" class="form-control discount-input"
+            name="products[{{ $item->product->id }}][discount]" value="{{ $item->discount }}" style="max-width: 100px;">
+    </td>
+
+    <td class="subtotal">{{ number_format($item->subtotal,2) }}</td>
+    <input type="hidden" name="products[{{ $item->product->id }}][subtotal]" value="{{ $item->subtotal }}">
+
+    <td><button type="button" class="btn btn-danger btn-sm remove-item" data-id="{{ $item->id }}"><span class="mdi mdi-delete-circle mdi-18px"></span></button></td> 
+
+    </tr> 
+        
+    @endforeach
         
            </tbody>
         </table>
