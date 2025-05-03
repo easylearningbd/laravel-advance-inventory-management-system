@@ -123,19 +123,19 @@
             <tr>
                 <td class="info-box">
                     <h5>Supplier Info</h5>
-                    <p><strong>Name:</strong>  </p>
-                    <p><strong>Email:</strong> </p>
-                    <p><strong>Phone:</strong>  </p>
+<p><strong>Name:</strong> {{ $purchase->supplier->name }} </p>
+<p><strong>Email:</strong> {{ $purchase->supplier->email }}</p>
+<p><strong>Phone:</strong> {{ $purchase->supplier->phone }} </p>
                 </td>
                 <td class="info-box">
                     <h5>Warehouse</h5>
-                    <p> </p>
+                    <p>{{ $purchase->warehouse->name }} </p>
                 </td>
                 <td class="info-box">
                     <h5>Purchase Info</h5>
-                    <p><strong>Date:</strong>  </p>
-                    <p><strong>Status:</strong>  </p>
-                    <p><strong>Grand Total:</strong>  </p>
+<p><strong>Date:</strong> {{ $purchase->date }} </p>
+<p><strong>Status:</strong> {{ $purchase->status }} </p>
+<p><strong>Grand Total:</strong> ${{ number_format($purchase->grand_total, 2)  }} </p>
                 </td>
             </tr>
         </table>
@@ -153,28 +153,28 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ( ) --}}
+                @foreach ($purchase->purchaseItems as $key => $item )
                     <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td> </td>
-                        <td>$ </td>
-                        <td>$ </td>
-                        <td>$ </td>
+                <td>{{ $key + 1 }}</td>
+                <td>{{ $item->product->name }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>${{ number_format($item->net_unit_cost,2)  }}</td>
+                <td>${{ number_format($item->discount,2)  }}</td>
+                <td>${{ number_format($item->subtotal,2)  }}</td>
                     </tr>
-                {{-- @endforeach --}}
+                @endforeach
             </tbody>
         </table>
 
         <table class="summary-table">
             <tr>
-                <td><strong>Total Discount:</strong> $ </td>
+                <td><strong>Total Discount:</strong> ${{ number_format($purchase->discount,2)  }} </td>
             </tr>
             <tr>
-                <td><strong>Shipping Cost:</strong> $ </td>
+                <td><strong>Shipping Cost:</strong> ${{ number_format($purchase->shipping,2)  }} </td>
             </tr>
             <tr>
-                <td><strong>Grand Total:</strong> $ </td>
+                <td><strong>Grand Total:</strong> ${{ number_format($purchase->grand_total,2)  }} </td>
             </tr>
         </table>
     </div>
