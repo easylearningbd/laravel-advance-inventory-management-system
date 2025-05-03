@@ -84,11 +84,51 @@
 </div>
 {{-- End Purchase info --}}
 
+ {{-- Order Summary  --}}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card shadow-sm border-0 h-100" style="border-radius: 10px; transition: 0.2s">
+                <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #17a2b8, #0d6efd); border-radius:10px 10px 0 0;">
+                    <h5 class="mb-0 fw-bold">Order Summary</h5> 
+                </div>
 
 
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Net Unit Cost</th>
+                    <th>Discount</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+        <tbody>
+        @foreach ($purchase->purchaseItems as $key => $item)  
+            <tr>
+                <td>{{ $key + 1 }}</td>
+                <td>{{ $item->product->name }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>{{ number_format($item->net_unit_cost,2)  }}</td>
+                <td>{{ number_format($item->discount,2)  }}</td>
+                <td>{{ number_format($item->subtotal,2)  }}</td>
+            </tr>
+            @endforeach
+        </tbody> 
+        </table> 
     </div>
- 
 
+
+            </div> 
+        </div> 
+    </div> 
+</div>
+
+
+    </div> 
    
             </div>
          </div>
