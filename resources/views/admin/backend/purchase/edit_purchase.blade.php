@@ -28,6 +28,8 @@
              @enderror
           </div>
 
+        <input type="hidden" name="warehouse_id" value="{{ $editData->warehouse_id }}">
+
           <div class="col-md-4 mb-3">
                 <div class="form-group w-100">
                 <label class="form-label" for="formBasic">Warehouse : <span class="text-danger">*</span></label>
@@ -44,7 +46,7 @@
           <div class="col-md-4 mb-3">
              <div class="form-group w-100">
                 <label class="form-label" for="formBasic">Supplier : <span class="text-danger">*</span></label>
-                <select name="supplier_id" id="supplier_id" class="form-control form-select" disabled>
+                <select name="supplier_id" id="supplier_id" class="form-control form-select" >
                    <option value="">Select Supplier</option>
                    @foreach ($suppliers as $item)
                    <option value="{{ $item->id }}" {{ $editData->supplier_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
@@ -156,7 +158,7 @@
                    <tr>
                       <td class="py-3 text-primary">Grand Total</td>
                       <td class="py-3 text-primary" id="grandTotal">TK {{ $editData->grand_total }}</td>
-                      <input type="hidden" name="grand_total">
+                      <input type="hidden" name="grand_total" value="{{ $editData->grand_total }}">
                    </tr>      
                    
                
