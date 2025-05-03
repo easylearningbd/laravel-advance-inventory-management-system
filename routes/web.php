@@ -107,6 +107,7 @@ Route::controller(PurchaseController::class)->group(function(){
     Route::post('/update/purchase/{id}', 'UpdatePurchase')->name('update.purchase'); 
 
     Route::get('/details/purchase/{id}', 'DetailsPurchase')->name('details.purchase'); 
+    Route::get('/invoice/purchase/{id}', 'InvoicePurchase')->name('invoice.purchase');
     
 });
 
