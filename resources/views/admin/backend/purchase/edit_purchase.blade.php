@@ -241,8 +241,111 @@
 
  
 <script>
-    var productSearchUrl = "{{ route('purchase.product.search') }}"
-</script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const productBody = document.getElementById("productBody");
+    
+        // Update subtotal when quantity or net unit cost changes
+        productBody.addEventListener("input", function (e) {
+            if (e.target.classList.contains("qty-input") || e.target.classList.contains("net-cost")) {
+                let row = e.target.closest("tr");
+                let qty = parseFloat(row.querySelector(".qty-input").value) || 0;
+                let cost = parseFloat(row.querySelector(".net-cost").value) || 0;
+                let discount = parseFloat(row.querySelector(".discount-input").value) || 0;
+    
+                let subtotal = (qty * cost) - discount;
+                row.querySelector(".subtotal").textContent = subtotal.toFixed(2);
+            }
+        });
+                
+                
+             // Increment quantity
+             document.querySelectorAll(".increment-qty").forEach(button => {
+                button.addEventListener("click", function () {
+                   let input = this.closest(".input-group").querySelector(".qty-input");
+                   let max = parseInt(input.getAttribute("max"));
+                   let value = parseInt(input.value);
+                   if (value < max) {
+                         input.value = value + 1;
+                         updateSubtotal(this.closest("tr"));
+                   }
+                });
+             });
+ 
+             // Decrement quantity
+             document.querySelectorAll(".decrement-qty").forEach(button => {
+                button.addEventListener("click", function () {
+                   let input = this.closest(".input-group").querySelector(".qty-input");
+                   let min = parseInt(input.getAttribute("min"));
+                   let value = parseInt(input.value);
+                   if (value > min) {
+                         input.value = value - 1;
+                         updateSubtotal(this.closest("tr"));
+                   }
+                });
+             });
+ 
+ 
+          function updateSubtotal(row) {
+             let qty = parseFloat(row.querySelector(".qty-input").value);
+             let discount = parseFloat(row.querySelector(".discount-input").value) || 0;
+             let netUnitCost = parseFloat(row.querySelector(".qty-input").dataset.cost);
+ 
+             // Calculate subtotal after discount
+             let subtotal = (netUnitCost * qty) - discount;
+             
+             // Update visible subtotal
+             row.querySelector(".subtotal").innerText = subtotal.toFixed(2);
+ 
+             // Update hidden input for subtotal
+             row.querySelector("input[name^='products['][name$='][subtotal]']").value = subtotal.toFixed(2);
+ 
+             // Update Grand Total
+             updateGrandTotal();
+          }
+ 
+ 
+ 
+       // Grand total update function
+       function updateGrandTotal() {
+          let grandTotal = 0;
+ 
+          // Calculate subtotal sum
+          document.querySelectorAll(".subtotal").forEach(function (item) {
+             grandTotal += parseFloat(item.textContent) || 0;
+          });
+ 
+          // Get discount and shipping values
+          let discount = parseFloat(document.getElementById("inputDiscount").value) || 0;
+          let shipping = parseFloat(document.getElementById("inputShipping").value) || 0;
+ 
+          // Apply discount and add shipping cost
+          grandTotal = grandTotal - discount + shipping;
+ 
+          // Ensure grand total is not negative
+          if (grandTotal < 0) {
+             grandTotal = 0;
+          }
+ 
+          // Update Grand Total display
+          document.getElementById("grandTotal").textContent = `TK ${grandTotal.toFixed(2)}`;
+ 
+          // Also update the hidden input field
+          document.getElementById("grandTotalInput").value = grandTotal.toFixed(2);
+       }
+ 
+ 
+       // Remove item
+       productBody.addEventListener("click", function (e) {
+            if (e.target.classList.contains("remove-item")) {
+                e.target.closest("tr").remove();
+                updateGrandTotal();
+            }
+        });
+    
+    
+    });
+    
+ </script>
 
 
 @endsection
