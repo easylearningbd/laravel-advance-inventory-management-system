@@ -14,7 +14,7 @@ class Purchase extends Model
 
     public function supplier(){
         return $this->belongsTo(Supplier::class, 'supplier_id');
-    }
+    } 
 
     public function warehouse(){
         return $this->belongsTo(WareHouse::class, 'warehouse_id');
