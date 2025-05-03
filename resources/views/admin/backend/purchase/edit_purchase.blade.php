@@ -12,7 +12,7 @@
 
  <div class="card">
     <div class="card-body">
-    <form action="{{ route('store.purchase')}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('update.purchase',$editData->id)}}" method="post" enctype="multipart/form-data">
        @csrf
 
 
@@ -49,10 +49,7 @@
                    @foreach ($suppliers as $item)
                    <option value="{{ $item->id }}" {{ $editData->supplier_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                    @endforeach
-                </select>
-                @error('supplier_id')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
+                </select>  
              </div>
           </div>
        </div>
