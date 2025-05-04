@@ -124,6 +124,7 @@ Route::controller(ReturnPurchaseController::class)->group(function(){
     Route::get('/invoice/return/purchase/{id}', 'InvoiceReturnPurchase')->name('invoice.return.purchase');
     Route::get('/edit/return/purchase/{id}', 'EditReturnPurchase')->name('edit.return.purchase');
     Route::post('/update/return/purchase/{id}', 'UpdateReturnPurchase')->name('update.return.purchase');
+    Route::get('/delete/return/purchase/{id}', 'DeleteReturnPurchase')->name('delete.return.purchase');
      
     
 });

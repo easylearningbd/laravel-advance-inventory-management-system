@@ -196,7 +196,34 @@ class ReturnPurchaseController extends Controller
     }
     // End Method 
 
-    
+    public function DeleteReturnPurchase($id){
+        try {
+          DB::beginTransaction();
+          $purchase = ReturnPurchase::findOrFail($id);
+          $purchaseItems = ReturnPurchaseItem::where('return_purchase_id',$id)->get();
+
+          foreach($purchaseItems as $item){
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->increment('product_qty',$item->quantity);
+            }
+          }
+          ReturnPurchaseItem::where('return_purchase_id',$id)->delete();
+          $purchase->delete();
+          DB::commit();
+
+          $notification = array(
+            'message' => 'Return Purchase Deleted Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->route('all.return.purchase')->with($notification);  
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+          }  
+    }
+    // End Method 
 
 
 
