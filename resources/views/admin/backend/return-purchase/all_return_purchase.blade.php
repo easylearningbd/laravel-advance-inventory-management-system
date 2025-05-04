@@ -13,7 +13,7 @@
 
             <div class="text-end">
                 <ol class="breadcrumb m-0 py-0">
-                     <a href="{{ route('add.purchase') }}" class="btn btn-secondary">Add Return Purchase</a>
+                     <a href="{{ route('add.return.purchase') }}" class="btn btn-secondary">Add Return Purchase</a>
                 </ol>
             </div>
         </div>
