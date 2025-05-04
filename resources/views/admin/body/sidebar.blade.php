@@ -137,7 +137,7 @@
         <a href="{{ route('all.purchase') }}" class="tp-link">All Purchase</a>
        </li>   
        <li>
-        <a href="{{ route('all.product') }}" class="tp-link">Purchase Return</a>
+        <a href="{{ route('all.return.purchase') }}" class="tp-link">Purchase Return</a>
        </li>  
                     
             </ul>
