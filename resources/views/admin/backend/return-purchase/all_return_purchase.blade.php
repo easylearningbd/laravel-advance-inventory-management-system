@@ -52,7 +52,7 @@
         <td>
    <a title="Details" href="{{ route('details.return.purchase',$item->id) }}" class="btn btn-info btn-sm"> <span class="mdi mdi-eye-circle mdi-18px"></span> </a> 
 
-   <a title="PDF Invoice" href="{{ route('invoice.purchase',$item->id) }}" class="btn btn-primary btn-sm"> <span class="mdi mdi-download-circle mdi-18px"></span> </a> 
+   <a title="PDF Invoice" href="{{ route('invoice.return.purchase',$item->id) }}" class="btn btn-primary btn-sm"> <span class="mdi mdi-download-circle mdi-18px"></span> </a> 
 
     <a title="Edit" href="{{ route('edit.purchase',$item->id) }}" class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px"></span> </a>  
 

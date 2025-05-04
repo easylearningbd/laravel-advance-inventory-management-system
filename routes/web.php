@@ -119,7 +119,9 @@ Route::controller(ReturnPurchaseController::class)->group(function(){
     Route::get('/all/return/purchase', 'AllReturnPurchase')->name('all.return.purchase');
     Route::get('/add/return/purchase', 'AddReturnPurchase')->name('add.return.purchase');
     Route::post('/store/return/purchase', 'StoreReturnPurchase')->name('store.return.purchase');
+
     Route::get('/details/return/purchase/{id}', 'DetailsReturnPurchase')->name('details.return.purchase');
+    Route::get('/invoice/return/purchase/{id}', 'InvoiceReturnPurchase')->name('invoice.return.purchase');
      
     
 });
