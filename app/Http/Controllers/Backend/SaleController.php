@@ -161,5 +161,34 @@ class SaleController extends Controller
     }
     // End Method 
 
+    public function DeleteSales($id){
+        try {
+          DB::beginTransaction();
+          $sales = Sale::findOrFail($id);
+          $SalesItems = SaleItem::where('sale_id',$id)->get();
+
+          foreach($SalesItems as $item){
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->increment('product_qty',$item->quantity);
+            }
+          }
+          SaleItem::where('sale_id',$id)->delete();
+          $sales->delete();
+          DB::commit();
+
+          $notification = array(
+            'message' => 'Sale Deleted Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->route('all.sale')->with($notification);  
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+          }  
+    }
+    // End Method 
+
 
 }
