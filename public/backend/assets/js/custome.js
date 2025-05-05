@@ -214,7 +214,48 @@ function updateGrandTotal() {
 
     document.querySelector("input[name='grand_total']").value = grandTotal.toFixed(2);
 
+    updateDueAmount();
+
 }
+
+
+/// Manage Due for sale page 
+function updateDueAmount() {
+    let grandTotal = parseFloat(document.querySelector("input[name='grand_total']").value) || 0;
+    let paidAmount = parseFloat(document.querySelector("input[name='paid_amount']").value) || 0;
+    // new add full paid functionality 
+    let fullPaidAmount = parseFloat(document.querySelector("input[name='full_paid']").value) || 0;
+
+    if (paidAmount < 0) {
+          paidAmount = 0;
+          document.querySelector("input[name='paid_amount']").value = 0;
+    }
+    // new add full paid functionality 
+    if (fullPaidAmount < 0) {
+          fullPaidAmount = 0;
+          document.querySelector("input[name='full_paid']").value = 0;
+    }
+
+    // calculate due amount 
+    // let dueAmount = grandTotal - paidAmount;
+
+    // new add full paid functionality 
+    let dueAmount = grandTotal - (paidAmount + fullPaidAmount);
+
+    if (dueAmount < 0) {
+          dueAmount = 0;
+    }
+    document.getElementById("dueAmount").textContent = `TK ${dueAmount.toFixed(2)}`;
+    document.querySelector("input[name='due_amount']").value = dueAmount.toFixed(2);
+}
+
+// Event listeners for discount and shipping input change
+document.getElementById("inputDiscount").addEventListener("input", updateGrandTotal);
+document.getElementById("inputShipping").addEventListener("input", updateGrandTotal);
+document.querySelector("input[name='paid_amount']").addEventListener("input", updateDueAmount);
+// new add full paid functionality 
+document.querySelector("input[name='full_paid']").addEventListener("input", updateDueAmount);
+ 
 
 
  /// Start Modal  
