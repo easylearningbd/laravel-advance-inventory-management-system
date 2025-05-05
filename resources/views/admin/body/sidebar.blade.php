@@ -144,6 +144,26 @@
         </div>
     </li>
 
+
+    <li>
+        <a href="#Sale" data-bs-toggle="collapse">
+            <i data-feather="users"></i>
+            <span> Sale Manage </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="Sale">
+            <ul class="nav-second-level">
+        <li>
+        <a href="{{ route('all.sale') }}" class="tp-link">All Sale</a>
+       </li>   
+       <li>
+        <a href="{{ route('all.return.purchase') }}" class="tp-link">Sale Return</a>
+       </li>  
+                    
+            </ul>
+        </div>
+    </li>
+
     <li>
         <a href="#sidebarError" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
