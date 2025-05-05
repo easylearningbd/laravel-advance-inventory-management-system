@@ -34,7 +34,8 @@
             <th>Sl</th>
             <th>WareHouse</th>
             <th>Status</th> 
-            <th>Grand Total</th>
+            <th>Grand Total</th> 
+            <th>Paid Amount</th>
             <th>Due Amount</th>
             <th>Created</th> 
             <th>Action</th>
@@ -47,6 +48,7 @@
         <td>{{ $item['warehouse']['name'] }}</td>
         <td>{{ $item->status }}</td>
         <td>${{ $item->grand_total }}</td> 
+        <td> <h4> <span class="badge text-bg-info">${{ $item->paid_amount }} </span> </h4> </td>
         <td> <h4> <span class="badge text-bg-secondary">${{ $item->due_amount }} </span> </h4> </td>
         <td>{{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d') }}</td>
         <td>

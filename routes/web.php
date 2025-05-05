@@ -133,6 +133,7 @@ Route::controller(ReturnPurchaseController::class)->group(function(){
 Route::controller(SaleController::class)->group(function(){
     Route::get('/all/sale', 'AllSales')->name('all.sale');
     Route::get('/add/sale', 'AddSales')->name('add.sale');
+    Route::post('/store/sale', 'StoreSales')->name('store.sale');
    
     
 });
