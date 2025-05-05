@@ -12,7 +12,7 @@
 
  <div class="card">
     <div class="card-body">
-    <form action="{{ route('update.purchase',$editData->id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('update.sale',$editData->id)}}" method="post" enctype="multipart/form-data">
        @csrf
 
 

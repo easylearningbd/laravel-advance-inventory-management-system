@@ -108,6 +108,58 @@ class SaleController extends Controller
     }
     // End Method 
 
-    
+    public function UpdateSales(Request $request, $id){
+
+        $request->validate([
+            'date' => 'required|date',
+            'status' => 'required', 
+        ]);
+
+        $sales = Sale::findOrFail($id);
+        $sales->update([
+            'date' => $request->date,
+            'warehouse_id' => $request->warehouse_id,
+            'customer_id' => $request->customer_id,
+            'discount' => $request->discount ?? 0,
+            'shipping' => $request->shipping ?? 0,
+            'status' => $request->status,
+            'note' => $request->note,
+            'grand_total' => $request->grand_total,
+            'paid_amount' => $request->paid_amount,
+            'due_amount' => $request->due_amount,
+            'full_paid' => $request->full_paid,   
+        ]);
+
+    // Delete old sales item
+    SaleItem::where('sale_id',$sales->id)->delete();
+
+    foreach($request->products as $product_id => $product){
+        SaleItem::create([
+            'sale_id' => $sales->id,
+            'product_id' => $product_id,
+            'net_unit_cost' => $product['net_unit_cost'],
+            'stock' => $product['stock'],
+            'quantity' => $product['quantity'],
+            'discount' => $product['discount'] ?? 0,
+            'subtotal' => $product['subtotal'],  
+        ]);
+
+        /// Update Product Stock
+
+        $productModel = Product::find($product_id);
+        if ($productModel) {
+            $productModel->product_qty += $product['quantity'];
+            $productModel->save();
+        }  
+    }
+
+    $notification = array(
+        'message' => 'Sale Updated Successfully',
+        'alert-type' => 'success'
+     ); 
+     return redirect()->route('all.sale')->with($notification);  
+    }
+    // End Method 
+
 
 }
