@@ -100,5 +100,14 @@ class SaleController extends Controller
     }
     // End Method 
 
+    public function EditSales($id){
+        $editData = Sale::with('saleItems.product')->findOrFail($id);
+        $customers = Customer::all();
+        $warehouses = WareHouse::all();
+        return view('admin.backend.sales.edit_sales',compact('editData','customers','warehouses'));
+    }
+    // End Method 
+
+    
 
 }
