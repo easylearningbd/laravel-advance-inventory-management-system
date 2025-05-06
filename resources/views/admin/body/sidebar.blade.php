@@ -165,18 +165,18 @@
     </li>
 
     <li>
-        <a href="#sidebarError" data-bs-toggle="collapse">
+        <a href="#Due" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
-            <span> Error Pages </span>
+            <span> Due Setup </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarError">
+        <div class="collapse" id="Due">
             <ul class="nav-second-level">
                 <li>
-                    <a href="error-404.html" class="tp-link">Error 404</a>
+                    <a href="{{ route('due.sale') }}" class="tp-link">Sales Due</a>
                 </li>
                 <li>
-                    <a href="error-500.html" class="tp-link">Error 500</a>
+                    <a href="error-500.html" class="tp-link">Sales Return Due</a>
                 </li>
                 
             </ul>

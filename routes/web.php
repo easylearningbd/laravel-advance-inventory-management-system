@@ -157,6 +157,12 @@ Route::controller(SaleReturnController::class)->group(function(){
 });
 
 
+Route::controller(SaleReturnController::class)->group(function(){
+    Route::get('/due/sale', 'DueSale')->name('due.sale');  
+
+});
+
+
 
 
     
