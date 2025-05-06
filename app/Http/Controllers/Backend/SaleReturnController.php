@@ -161,5 +161,12 @@ class SaleReturnController extends Controller
     }
     // End Method 
 
+    public function DetailsSalesReturn($id){
+        $sales = SaleReturn::with(['customer','saleReturnItems.product'])->find($id);
+        return view('admin.backend.return-sale.sales_return_details',compact('sales'));
+
+    }
+     // End Method 
+
 
 }
