@@ -146,6 +146,8 @@ Route::controller(SaleController::class)->group(function(){
 
 Route::controller(SaleReturnController::class)->group(function(){
     Route::get('/all/sale/return', 'AllSalesReturn')->name('all.sale.return'); 
+    Route::get('/add/sale/return', 'AddSalesReturn')->name('add.sale.return');
+    Route::post('/store/sale/return', 'StoreSalesReturn')->name('store.sale.return');
 
 });
 
