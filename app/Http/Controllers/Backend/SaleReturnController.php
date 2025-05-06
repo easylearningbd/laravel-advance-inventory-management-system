@@ -168,5 +168,34 @@ class SaleReturnController extends Controller
     }
      // End Method 
 
+     public function DeleteSalesReturn($id){
+        try {
+          DB::beginTransaction();
+          $sales = SaleReturn::findOrFail($id);
+          $SalesItems = SaleReturnItem::where('sale_return_id',$id)->get();
+
+          foreach($SalesItems as $item){
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->decrement('product_qty',$item->quantity);
+            }
+          }
+          SaleReturnItem::where('sale_return_id',$id)->delete();
+          $sales->delete();
+          DB::commit();
+
+          $notification = array(
+            'message' => 'Sale Return Deleted Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->route('all.sale.return')->with($notification);  
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+          }  
+    }
+    // End Method 
+
 
 }
