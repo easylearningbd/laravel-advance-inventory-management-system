@@ -176,7 +176,7 @@
                     <a href="{{ route('due.sale') }}" class="tp-link">Sales Due</a>
                 </li>
                 <li>
-                    <a href="error-500.html" class="tp-link">Sales Return Due</a>
+                    <a href="{{ route('due.sale.return') }}" class="tp-link">Sales Return Due</a>
                 </li>
                 
             </ul>

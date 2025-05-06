@@ -169,10 +169,10 @@
                       </td>
                    </tr>
                    <!-- new add full paid functionality  -->
-                   <tr class="d-none">
+                   <tr>
                       <td class="py-3">Full Paid</td>
                       <td class="py-3" id="fullPaid"> 
-                         <input type="text"  name="full_paid" id="fullPaidInput" value="{{ $editData->full_paid }}"> 
+                         <input type="text" class="form-control" name="full_paid" id="fullPaidInput" value="{{ $editData->full_paid }}"> 
                       </td>
                    </tr>
                    <tr>
