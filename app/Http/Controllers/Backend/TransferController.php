@@ -124,6 +124,84 @@ class TransferController extends Controller
     }
         // End Method 
 
+    public function UpdateTransfer(Request $request, $id){
+
+        try {
+
+         DB::beginTransaction();
+
+         $transfer = Transfer::findOrFail($id);
+
+         // Restore previous stock
+         $oldTransferItems = TransferItem::where('transfer_id', $transfer->id)->get();
+
+         foreach($oldTransferItems as $oldItem){
+            Product::where('id',$oldItem->product_id)
+                ->where('warehouse_id',$transfer->from_warehouse_id)
+                ->increment('product_qty',$oldItem->quantity);
+
+            Product::where('id',$oldItem->product_id)
+            ->where('warehouse_id',$transfer->to_warehouse_id)
+            ->decrement('product_qty',$oldItem->quantity);
+
+            /// Delete odl transfer items to prevent duplicate entries 
+
+            TransferItem::where('transfer_id',$transfer->id)->delete();
+
+            // update the transfer record
+            $transfer->update([
+            'date' => $request->date, 
+            'discount' => $request->discount ?? 0,
+            'shipping' => $request->shipping ?? 0,
+            'status' => $request->status,
+            'note' => $request->note,
+            'grand_total' => $request->grand_total, 
+            ]);
+
+            /// add new transfer items
+          foreach($request->products as $productId => $productData){
+            $product = Product::find($productId);
+            if (!$product) {
+                throw new \Exception("Product id not found");
+            }
+            // Create new Transfer item in transfer item table 
+            $transferItem = TransferItem::create([
+                'transfer_id' => $transfer->id,
+                'product_id' => $productId,
+                'net_unit_cost' => $product->price ?? 0,
+                'stock' => $product->product_qty,
+                'quantity' => $productData['quantity'],
+                'discount' => $productData['discount'] ?? 0,
+                'subtotal' => $productData['subtotal'] ?? 0,
+            ]);
+
+            Product::where('id',$productId)
+            ->where('warehouse_id',$transfer->from_warehouse_id)
+            ->decrement('product_qty',$productData['quantity']);
+            /// Sending warehouse  quantity
+
+            Product::where('warehouse_id',$transfer->to_warehouse_id)
+            ->increment('product_qty',$productData['quantity']);
+                /// receiving warehouse  quantity 
+          }
+
+          DB::commit();
+
+            $notification = array(
+                'message' => 'Transfer Updated Successfully',
+                'alert-type' => 'success'
+            ); 
+            return redirect()->route('all.transfer')->with($notification);  
+         } 
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+          }
+
+    }
+     // End Method 
+
 
 
 
