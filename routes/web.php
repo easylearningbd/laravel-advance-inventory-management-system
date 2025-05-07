@@ -171,6 +171,7 @@ Route::controller(TransferController::class)->group(function(){
     Route::post('/store/transfer', 'StoreTransfer')->name('store.transfer');
     Route::get('/edit/transfer/{id}', 'EditTransfer')->name('edit.transfer');
     Route::post('/update/transfer/{id}', 'UpdateTransfer')->name('update.transfer');
+    Route::get('/delete/transfer/{id}', 'DeleteTransfer')->name('delete.transfer');
       
      
 });

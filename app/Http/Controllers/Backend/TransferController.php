@@ -202,6 +202,41 @@ class TransferController extends Controller
     }
      // End Method 
 
+     public function DeleteTransfer($id){
+
+        try {
+          DB::beginTransaction();
+          $transfer = Transfer::findOrFail($id);
+          $transferItems = TransferItem::where('transfer_id',$transfer->id)->get();
+
+          foreach($transferItems as $item){
+            Product::where('id',$item->product_id)
+            ->where('warehouse_id',$transfer->from_warehouse_id)
+            ->increment('product_qty',$item->quantity);
+            /// Sending warehouse  quantity
+
+            Product::where('warehouse_id',$transfer->to_warehouse_id)
+            ->decrement('product_qty',$item->quantity);
+                /// receiving warehouse  quantity 
+
+          }
+          TransferItem::where('transfer_id',$transfer->id)->delete();
+          $transfer->delete();
+          DB::commit();
+
+          $notification = array(
+            'message' => 'Transfer Deleted Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->route('all.transfer')->with($notification);  
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+          }  
+    }
+    // End Method 
+
 
 
 
