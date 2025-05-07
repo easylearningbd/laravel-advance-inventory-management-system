@@ -237,6 +237,16 @@ class TransferController extends Controller
     }
     // End Method 
 
+   public function DetailsTransfer($id){
+    $transfer = Transfer::with(['transferItems.product'])->findOrFail($id);
+    $product = Product::find($transfer->product_id);
+    $fromWarehouse = WareHouse::find($transfer->from_warehouse_id);
+    $toWarehouse = WareHouse::find($transfer->to_warehouse_id);
+    return view('admin.backend.transfer.details_transfer',compact('transfer','product','fromWarehouse','toWarehouse'));
+
+   }
+    // End Method 
+
 
 
 
