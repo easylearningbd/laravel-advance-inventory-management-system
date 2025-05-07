@@ -12,7 +12,7 @@
 
  <div class="card">
     <div class="card-body">
-    <form action="{{ route('store.sale.return')}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('store.transfer')}}" method="post" enctype="multipart/form-data">
        @csrf
 
 
