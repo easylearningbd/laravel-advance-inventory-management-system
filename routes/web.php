@@ -166,7 +166,9 @@ Route::controller(SaleReturnController::class)->group(function(){
 
 
 Route::controller(TransferController::class)->group(function(){
-    Route::get('/all/transfer', 'AllTransfer')->name('all.transfer');  
+    Route::get('/all/transfer', 'AllTransfer')->name('all.transfer');
+    Route::get('/add/transfer', 'AddTransfer')->name('add.transfer');
+      
      
 });
 

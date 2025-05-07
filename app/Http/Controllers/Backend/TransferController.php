@@ -24,4 +24,10 @@ class TransferController extends Controller
     }
     // End Method 
 
+    public function AddTransfer(){
+        $warehouses = WareHouse::all();
+        return view('admin.backend.transfer.add_transfer',compact('warehouses'));
+    }
+    // End Method 
+
 }
