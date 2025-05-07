@@ -116,6 +116,14 @@ class TransferController extends Controller
     }
     // End Method 
 
+    public function EditTransfer($id){
+        $editData = Transfer::with(['fromWarehouse','toWarehouse','transferItems.product'])->findOrFail($id);
+        $warehouses = WareHouse::all();
+        return view('admin.backend.transfer.edit_transfer',compact('warehouses','editData')); 
+
+    }
+        // End Method 
+
 
 
 
