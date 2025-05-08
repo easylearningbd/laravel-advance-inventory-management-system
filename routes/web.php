@@ -180,7 +180,9 @@ Route::controller(TransferController::class)->group(function(){
 
 
 Route::controller(ReportController::class)->group(function(){
-    Route::get('/all/report', 'AllReport')->name('all.report');   
+    Route::get('/all/report', 'AllReport')->name('all.report'); 
+    
+    Route::get('/filter-purchases', 'FilterPurchases')->name('filter-purchases'); 
 
 });
 
