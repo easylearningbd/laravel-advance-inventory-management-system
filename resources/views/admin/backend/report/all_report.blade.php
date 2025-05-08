@@ -159,19 +159,66 @@
         <button id="apply-filter" class="btn btn-primary w-100">Apply</button> 
     </div> 
 </div>
-{{-- /// End Date rang filter  --}}
-
-
-
+{{-- /// End Date rang filter  --}} 
 
 
             </div> 
         </nav> 
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                <thead>
+                    <tr role="row">
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Supplier</th>
+                        <th>Warehouse</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unti Price</th>
+                        <th>Status</th>
+                        <th>Grand Total</th> 
+                    </tr>
+                </thead>
+            <tbody>
+            @foreach ($purchases as $key=> $purchase) 
+            @foreach ($purchase->purchaseItems as $item) 
+                <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $purchase->date }}</td>
+                    <td>{{ $purchase->supplier->name ?? 'N/A' }}</td>
+                    <td>{{ $purchase->warehouse->name ?? 'N/A' }}</td>
+                    <td>{{ $item->product->name ?? 'N/A'}}</td>
+                    <td>{{ $item->quantity ?? 'N/A'}}</td>
+                    <td>{{ $item->net_unit_cost ?? 'N/A'}}</td>
+                    <td>{{ $purchase->status ?? 'N/A' }}</td>
+                    <td>{{ $purchase->grand_total ?? 'N/A' }}</td> 
+                </tr>
+                @endforeach
+                @endforeach
+            </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+        </div>
+    </div>
+
+
+
+
+
      </div>
-     {{-- /// End Card --}}
-
-
-
+     {{-- /// End Card --}} 
 
 </div> 
 
