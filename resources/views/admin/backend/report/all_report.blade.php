@@ -113,10 +113,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a href="" class="nav-link active" aria-current="page">Purchase</a> 
+            <a href="{{ route('all.report') }}" class="nav-link active" aria-current="page">Purchase</a> 
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link purchase-return-tab" >Purchase Return</a> 
+            <a href="{{ route('purchase.return.report') }}" class="nav-link purchase-return-tab" >Purchase Return</a> 
         </li>
 
         <li class="nav-item">

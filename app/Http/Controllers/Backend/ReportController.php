@@ -40,5 +40,11 @@ class ReportController extends Controller
     }
      // End Method 
 
+    public function PurchaseReturnReport(){
+        $returnPurchases = ReturnPurchase::with(['purchaseItems.product','supplier','warehouse'])->get();
+        return view('admin.backend.report.purchase_return_report',compact('returnPurchases')); 
+    }
+      // End Method 
+
 
 }
