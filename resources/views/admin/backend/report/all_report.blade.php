@@ -100,19 +100,80 @@
         </div> 
     </div> 
 </div>
+ 
 
-
-
-
-        </div>
-
+        </div> 
     </div>
+     {{-- /// end Container  --}}
 
+     <div class="card">
+
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="" class="nav-link active" aria-current="page">Purchase</a> 
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link purchase-return-tab" >Purchase Return</a> 
+        </li>
+
+        <li class="nav-item">
+            <a href="" class="nav-link" >Sale</a> 
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link" >Sale Return</a> 
+        </li>
+
+        <li class="nav-item">
+            <a href="" class="nav-link" >Stock</a> 
+        </li>
+
+    </ul>     
 </div>
 
+{{-- /// Date rang filter  --}}
+<div class="row">
+    <div class="col-md-12 d-flex align-items-center position-relative">
+        <select id="date-range" class="form-control large-select">
+            <option value="" selected disabled>Select Date Range</option>
+            <option value="today">Today</option>
+            <option value="this_week">This Week</option>
+            <option value="last_week">Last Week</option>
+            <option value="this_month">This Month</option>
+            <option value="last_month">Last Month</option>
+            <option value="custom">Custom Range</option> 
+        </select>
+        <span class="mdi mdi-filter-menu"></span> 
+    </div>
+
+    {{-- // Custom date field  --}}
+    <div class="dropdown-menu p-3 custom-dropdown position-absolute shadow bg-white">
+        <label for="custom-start-date">Start Date:</label>
+        <input type="date" id="custom-start-date" class="form-control mb-2">
+
+        <label for="custom-end-date">End Date:</label>
+        <input type="date" id="custom-end-date" class="form-control mb-2">
+
+        <button id="apply-filter" class="btn btn-primary w-100">Apply</button> 
+    </div> 
+</div>
+{{-- /// End Date rang filter  --}}
 
 
 
+
+
+            </div> 
+        </nav> 
+     </div>
+     {{-- /// End Card --}}
+
+
+
+
+</div> 
 
 
 
