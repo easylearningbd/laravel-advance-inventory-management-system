@@ -201,6 +201,24 @@
         </div>
     </li>
 
+
+    <li>
+        <a href="#Report" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Report Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="Report">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('all.report') }}" class="tp-link">All Reports </a>
+                </li>
+                 
+                
+            </ul>
+        </div>
+    </li>
+
     
     
 

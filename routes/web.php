@@ -12,6 +12,8 @@ use App\Http\Controllers\Backend\ReturnPurchaseController;
 use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\Backend\SaleReturnController;
 use App\Http\Controllers\Backend\TransferController;
+use App\Http\Controllers\Backend\ReportController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -172,9 +174,14 @@ Route::controller(TransferController::class)->group(function(){
     Route::get('/edit/transfer/{id}', 'EditTransfer')->name('edit.transfer');
     Route::post('/update/transfer/{id}', 'UpdateTransfer')->name('update.transfer');
     Route::get('/delete/transfer/{id}', 'DeleteTransfer')->name('delete.transfer');
-    Route::get('/details/transfer/{id}', 'DetailsTransfer')->name('details.transfer');
-      
+    Route::get('/details/transfer/{id}', 'DetailsTransfer')->name('details.transfer'); 
      
+});
+
+
+Route::controller(ReportController::class)->group(function(){
+    Route::get('/all/report', 'AllReport')->name('all.report');   
+
 });
 
 
