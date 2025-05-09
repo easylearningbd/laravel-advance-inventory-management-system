@@ -127,7 +127,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="" class="nav-link" >Stock</a> 
+            <a href="{{ route('product.stock.report') }}" class="nav-link" >Stock</a> 
         </li>
 
     </ul>     

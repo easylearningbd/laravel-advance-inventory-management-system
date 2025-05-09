@@ -77,5 +77,12 @@ class ReportController extends Controller
     }
       // End Method 
 
+    public function ProductStockReport(){
+        $products = Product::with(['category','warehouse'])->get();
+        return view('admin.backend.report.stock_report',compact('products'));
+
+    }
+      // End Method 
+
 
 }
