@@ -175,7 +175,7 @@
                     <tr role="row">
                         <th>ID</th>
                         <th>Date</th>
-                        <th>Supplier</th>
+                        <th>Customer</th>
                         <th>Warehouse</th>
                         <th>Product</th>
                         <th>Quantity</th>
@@ -185,18 +185,18 @@
                     </tr>
                 </thead>
             <tbody>
-            @foreach ($purchases as $key=> $purchase) 
-            @foreach ($purchase->purchaseItems as $item) 
+            @foreach ($saleReports as $key=> $report) 
+            @foreach ($report->saleItems as $item) 
                 <tr>
                     <td>{{ $key+1 }}</td>
-                    <td>{{ $purchase->date }}</td>
-                    <td>{{ $purchase->supplier->name ?? 'N/A' }}</td>
-                    <td>{{ $purchase->warehouse->name ?? 'N/A' }}</td>
+                    <td>{{ $report->date }}</td>
+                    <td>{{ $report->customer->name ?? 'N/A' }}</td>
+                    <td>{{ $report->warehouse->name ?? 'N/A' }}</td>
                     <td>{{ $item->product->name ?? 'N/A'}}</td>
                     <td>{{ $item->quantity ?? 'N/A'}}</td>
                     <td>{{ $item->net_unit_cost ?? 'N/A'}}</td>
-                    <td>{{ $purchase->status ?? 'N/A' }}</td>
-                    <td>{{ $purchase->grand_total ?? 'N/A' }}</td> 
+                    <td>{{ $report->status ?? 'N/A' }}</td>
+                    <td>{{ $report->grand_total ?? 'N/A' }}</td> 
                 </tr>
                 @endforeach
                 @endforeach
@@ -352,7 +352,7 @@
     });
     
     function fetchFilteredData(startDate, endDate) {
-        fetch(`/filter-purchases?start_date=${startDate}&end_date=${endDate}`, {
+        fetch(`/filter-sales?start_date=${startDate}&end_date=${endDate}`, {
             headers: {
                 'Accept': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
@@ -360,31 +360,31 @@
         })
         .then(response => response.json())
         .then(data => {
-            updateTable(data.purchases);
+            updateTable(data.sales);
         })
         .catch(error => console.error('Error fetching data:', error));
     }
     
-    function updateTable(purchases) {
+    function updateTable(sales) {
         let tbody = document.querySelector("#example tbody");
         tbody.innerHTML = ""; // Clear existing rows
     
-        purchases.forEach(purchase => {
-            purchase.purchase_items.forEach(item => {
+        sales.forEach(sale => {
+            sale.sale_items.forEach(item => {
                 // Ensure net_unit_cost is a number, default to 0 if null/undefined
                 const netUnitCost = item.net_unit_cost ? parseFloat(item.net_unit_cost) : 0;
     
                 let row = `
                     <tr>
-                        <td>${purchase.id}</td>
-                        <td>${purchase.date}</td>
-                        <td>${purchase.supplier ? purchase.supplier.name : 'N/A'}</td>
-                        <td>${purchase.warehouse ? purchase.warehouse.name : 'N/A'}</td>
+                        <td>${sale.id}</td>
+                        <td>${sale.date}</td>
+                        <td>${sale.customer ? sale.customer.name : 'N/A'}</td>
+                        <td>${sale.warehouse ? sale.warehouse.name : 'N/A'}</td>
                         <td>${item.product ? item.product.name : 'N/A'}</td>
                         <td>${item.quantity}</td>
                         <td>${netUnitCost.toFixed(2)}</td> <!-- Use the validated number -->
-                        <td>${purchase.status}</td>
-                        <td>${purchase.grand_total ? parseFloat(purchase.grand_total).toFixed(2) : '0.00'}</td>
+                        <td>${sale.status}</td>
+                        <td>${sale.grand_total ? parseFloat(sale.grand_total).toFixed(2) : '0.00'}</td>
                     </tr>
                 `;
                 tbody.insertAdjacentHTML('beforeend', row);
