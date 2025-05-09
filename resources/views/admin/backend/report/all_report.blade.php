@@ -123,7 +123,7 @@
             <a href="{{ route('sale.report') }}" class="nav-link" >Sale</a> 
         </li>
         <li class="nav-item">
-            <a href="" class="nav-link" >Sale Return</a> 
+            <a href="{{ route('sale.return.report') }}" class="nav-link" >Sale Return</a> 
         </li>
 
         <li class="nav-item">
