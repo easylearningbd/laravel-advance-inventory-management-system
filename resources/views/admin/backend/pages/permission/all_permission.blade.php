@@ -13,7 +13,7 @@
 
             <div class="text-end">
                 <ol class="breadcrumb m-0 py-0">
-                     <a href="{{ route('add.warehouse') }}" class="btn btn-secondary">Add Permission</a>
+                     <a href="{{ route('add.permission') }}" class="btn btn-secondary">Add Permission</a>
                 </ol>
             </div>
         </div>
