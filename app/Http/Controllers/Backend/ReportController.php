@@ -22,6 +22,8 @@ class ReportController extends Controller
     }
     // End Method 
 
+    
+
     public function FilterPurchases(Request $request){
 
         $startDate = $request->input('start_date');
