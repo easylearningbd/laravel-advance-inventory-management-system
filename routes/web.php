@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\Backend\SaleReturnController;
 use App\Http\Controllers\Backend\TransferController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\RoleController;
 
 
 Route::get('/', function () {
@@ -190,6 +191,12 @@ Route::controller(ReportController::class)->group(function(){
     Route::get('/filter-purchases', 'FilterPurchases')->name('filter-purchases'); 
     Route::get('/filter-sales', 'FilterSales')->name('filter-sales');
 
+});
+
+
+Route::controller(RoleController::class)->group(function(){
+    Route::get('/all/permission', 'AllPermission')->name('all.permission'); 
+ 
 });
 
 
