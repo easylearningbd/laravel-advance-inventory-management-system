@@ -236,7 +236,7 @@
                     <a href="{{ route('all.permission') }}" class="tp-link">All Permission</a>
                 </li>
                 <li>
-                    <a href="ui-alerts.html" class="tp-link">Alerts</a>
+                    <a href="{{ route('all.roles') }}" class="tp-link">All Roles</a>
                 </li>
                 
             </ul>
