@@ -42,12 +42,47 @@
             </select>
         </div> 
 
+    <div class="form-check mb-2">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+     Permission All 
+    </label>
+    </div>
 
-        <div class="col-md-6">
-            <label for="validationDefault01" class="form-label">Permission Name</label>
-            <input type="text" class="form-control" name="name"  > 
+    <hr>
+    @foreach ($permission_groups as $group)
+    <div class="row">
+        <div class="col-3">
+     <div class="form-check mb-2">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+     {{ $group->group_name }}
+    </label>
+    </div> 
         </div>
 
+
+  <div class="col-9">
+    @php
+        $permissions = App\Models\User::getpermissionByGroupName($group->group_name)
+    @endphp
+
+    @foreach ($permissions as $permission) 
+     <div class="form-check mb-2">
+    <input class="form-check-input" name="permission[]" value="{{ $permission->id }}" type="checkbox" id="flexCheckDefault{{ $permission->id }}">
+    <label class="form-check-label" for="flexCheckDefault{{ $permission->id }}">
+     {{ $permission->name }}
+    </label>
+    </div> 
+     @endforeach
+     <br> 
+
+      </div>  
+    </div> 
+    {{-- // End Row --}}
+        
+    @endforeach
+         
         
             
         <div class="col-12">
