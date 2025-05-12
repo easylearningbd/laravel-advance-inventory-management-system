@@ -2,6 +2,12 @@
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+<style>
+    .form-check-label{
+        text-transform: capitalize;
+    }
+</style>
+
 <div class="content">
 
     <!-- Start Content-->
@@ -43,8 +49,8 @@
         </div> 
 
     <div class="form-check mb-2">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
+    <input class="form-check-input" type="checkbox" id="formCheck1">
+    <label class="form-check-label" for="formCheck1">
      Permission All 
     </label>
     </div>
@@ -102,5 +108,14 @@
 
 </div>
  
+<script>
+    $('#formCheck1').click(function(){
+        if($(this).is(':checked')){
+            $('input[type=checkbox]').prop('checked',true)
+        }else {
+             $('input[type=checkbox]').prop('checked',false)
+        }
+    })
+</script>
 
 @endsection
