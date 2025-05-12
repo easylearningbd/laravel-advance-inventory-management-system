@@ -29,7 +29,7 @@
                     </div><!-- end card header -->
 
 <div class="card-body">
-    <form action="{{ route('store.warehouse') }}" method="post" class="row g-3" enctype="multipart/form-data">
+    <form action="{{ route('store.admin') }}" method="post" class="row g-3" enctype="multipart/form-data">
         @csrf
 
         <div class="col-md-6">
@@ -44,7 +44,7 @@
 
           <div class="col-md-6">
             <label for="validationDefault01" class="form-label">Admin Password</label>
-            <input type="text" class="form-control" name="password"  >  
+            <input type="password" class="form-control" name="password"  >  
         </div>
 
           <div class="col-md-6">
