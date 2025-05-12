@@ -231,15 +231,19 @@
             <span class="menu-arrow"></span>
         </a>
         <div class="collapse" id="sidebarBaseui">
-            <ul class="nav-second-level">
-                <li>
-                    <a href="{{ route('all.permission') }}" class="tp-link">All Permission</a>
-                </li>
-                <li>
-                    <a href="{{ route('all.roles') }}" class="tp-link">All Roles</a>
-                </li>
-                
-            </ul>
+<ul class="nav-second-level">
+    <li>
+        <a href="{{ route('all.permission') }}" class="tp-link">All Permission</a>
+    </li>
+    <li>
+        <a href="{{ route('all.roles') }}" class="tp-link">All Roles</a>
+    </li>
+
+    <li>
+        <a href="{{ route('add.roles.permission') }}" class="tp-link">Role In Permission</a>
+    </li>
+    
+</ul>
         </div>
     </li>
 
