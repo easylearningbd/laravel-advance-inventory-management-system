@@ -35,7 +35,7 @@
                     </div><!-- end card header -->
 
 <div class="card-body">
-    <form action="{{ route('role.permission.store') }}" method="post" class="row g-3" enctype="multipart/form-data">
+    <form action="{{ route('admin.roles.update',$role->id) }}" method="post" class="row g-3" enctype="multipart/form-data">
         @csrf
 
         <div class="col-md-6">
