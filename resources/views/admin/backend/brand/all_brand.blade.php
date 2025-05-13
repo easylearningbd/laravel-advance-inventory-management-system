@@ -44,8 +44,14 @@
                 <td>{{ $item->name }}</td>
                 <td> <img src="{{ asset($item->image) }}" style="width: 70px; height:40px"> </td>
                 <td>
-            <a href="{{ route('edit.brand',$item->id) }}" class="btn btn-success btn-sm">Edit</a>  
-            <a href="{{ route('delete.brand',$item->id) }}" class="btn btn-danger btn-sm" id="delete">Delete</a>    
+          @if (Auth::guard('web')->user()->can('edit.brand'))  
+        <a href="{{ route('edit.brand',$item->id) }}" class="btn btn-success btn-sm">Edit</a>  
+          @endif
+
+           @if (Auth::guard('web')->user()->can('delete.brand'))  
+            <a href="{{ route('delete.brand',$item->id) }}" class="btn btn-danger btn-sm" id="delete">Delete</a>   
+          @endif
+
                 </td> 
             </tr>
             @endforeach 

@@ -37,6 +37,7 @@
 
     <li class="menu-title">Pages</li>
 
+    @if (Auth::guard('web')->user()->can('brand.menu')) 
     <li>
         <a href="#sidebarAuth" data-bs-toggle="collapse">
             <i data-feather="users"></i>
@@ -45,15 +46,18 @@
         </a>
         <div class="collapse" id="sidebarAuth">
             <ul class="nav-second-level">
-        <li>
+       @if (Auth::guard('web')->user()->can('all.brand'))   
+      <li>
         <a href="{{ route('all.brand') }}" class="tp-link">All Brand</a>
-       </li>   
+       </li>
+       @endif   
                     
             </ul>
         </div>
     </li>
+     @endif
 
-
+ @if (Auth::guard('web')->user()->can('warehouse.menu')) 
     <li>
         <a href="#WareHouse" data-bs-toggle="collapse">
             <i data-feather="users"></i>
@@ -62,13 +66,16 @@
         </a>
         <div class="collapse" id="WareHouse">
             <ul class="nav-second-level">
-        <li>
+       @if (Auth::guard('web')->user()->can('all.warehouse'))  
+       <li>
         <a href="{{ route('all.warehouse') }}" class="tp-link">All WareHouse</a>
-       </li>   
+       </li>  
+       @endif 
                     
             </ul>
         </div>
     </li>
+      @endif
 
 
     <li>
