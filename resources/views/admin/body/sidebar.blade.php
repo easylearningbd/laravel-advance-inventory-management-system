@@ -77,7 +77,7 @@
     </li>
       @endif
 
-
+ @if (Auth::guard('web')->user()->can('supplier.menu')) 
     <li>
         <a href="#Supplier" data-bs-toggle="collapse">
             <i data-feather="users"></i>
@@ -93,7 +93,9 @@
             </ul>
         </div>
     </li>
+    @endif
 
+     @if (Auth::guard('web')->user()->can('customer.menu')) 
     <li>
         <a href="#Customer" data-bs-toggle="collapse">
             <i data-feather="users"></i>
@@ -109,7 +111,7 @@
             </ul>
         </div>
     </li>
-
+    @endif
 
     <li>
         <a href="#Product" data-bs-toggle="collapse">
