@@ -60,7 +60,7 @@
  @if (Auth::guard('web')->user()->can('warehouse.menu')) 
     <li>
         <a href="#WareHouse" data-bs-toggle="collapse">
-            <i data-feather="users"></i>
+           <i data-feather="alert-octagon"></i>
             <span> WareHouse Manage </span>
             <span class="menu-arrow"></span>
         </a>
@@ -80,7 +80,7 @@
  @if (Auth::guard('web')->user()->can('supplier.menu')) 
     <li>
         <a href="#Supplier" data-bs-toggle="collapse">
-            <i data-feather="users"></i>
+           <i data-feather="file-text"></i>
             <span> Supplier Manage </span>
             <span class="menu-arrow"></span>
         </a>
@@ -98,7 +98,7 @@
      @if (Auth::guard('web')->user()->can('customer.menu')) 
     <li>
         <a href="#Customer" data-bs-toggle="collapse">
-            <i data-feather="users"></i>
+              <i data-feather="calendar"></i>
             <span> Customer Manage </span>
             <span class="menu-arrow"></span>
         </a>
@@ -115,7 +115,7 @@
 
     <li>
         <a href="#Product" data-bs-toggle="collapse">
-            <i data-feather="users"></i>
+            <i data-feather="package"></i>
             <span> Product Manage </span>
             <span class="menu-arrow"></span>
         </a>
@@ -136,7 +136,7 @@
 
     <li>
         <a href="#Purchase" data-bs-toggle="collapse">
-            <i data-feather="users"></i>
+           <i data-feather="aperture"></i>
             <span> Purchase Manage </span>
             <span class="menu-arrow"></span>
         </a>
@@ -156,7 +156,7 @@
 
     <li>
         <a href="#Sale" data-bs-toggle="collapse">
-            <i data-feather="users"></i>
+           <i data-feather="award"></i>
             <span> Sale Manage </span>
             <span class="menu-arrow"></span>
         </a>
@@ -175,7 +175,7 @@
 
     <li>
         <a href="#Due" data-bs-toggle="collapse">
-            <i data-feather="alert-octagon"></i>
+           <i data-feather="briefcase"></i>
             <span> Due Setup </span>
             <span class="menu-arrow"></span>
         </a>
@@ -195,7 +195,7 @@
 
     <li>
         <a href="#Transfers" data-bs-toggle="collapse">
-            <i data-feather="alert-octagon"></i>
+            <i data-feather="table"></i>
             <span> Transfers Setup </span>
             <span class="menu-arrow"></span>
         </a>
@@ -213,7 +213,7 @@
 
     <li>
         <a href="#Report" data-bs-toggle="collapse">
-            <i data-feather="alert-octagon"></i>
+          <i data-feather="pie-chart"></i>
             <span> Report Setup </span>
             <span class="menu-arrow"></span>
         </a>
@@ -261,12 +261,12 @@
 
 
      <li>
-        <a href="#sidebarBaseui" data-bs-toggle="collapse">
-            <i data-feather="package"></i>
+        <a href="#Admin" data-bs-toggle="collapse">
+        <i data-feather="map"></i>
             <span> Manage Admin </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarBaseui">
+        <div class="collapse" id="Admin">
 <ul class="nav-second-level">
     <li>
         <a href="{{ route('all.admin') }}" class="tp-link">All Admin</a>
@@ -277,24 +277,7 @@
     </li>
 
 
-    <li>
-        <a href="#sidebarAdvancedUI" data-bs-toggle="collapse">
-            <i data-feather="cpu"></i>
-            <span> Extended UI </span>
-            <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarAdvancedUI">
-            <ul class="nav-second-level">
-                <li>
-                    <a href="extended-carousel.html" class="tp-link">Carousel</a>
-                </li>
-                <li>
-                    <a href="extended-notifications.html" class="tp-link">Notifications</a>
-                </li>
-                    
-            </ul>
-        </div>
-    </li>
+  
 
 
             </ul>
